@@ -1,36 +1,144 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-	<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Lato:300,400,700'>
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ionicons/1.5.2/css/ionicons.min.css">
-	<link rel="stylesheet" href="/netgfix/resources/css/style.css">
+<title>Catalogo de Gifs</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="netgfixweb/resources/css/style.css">
 
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+<link rel="stylesheet" href="netgfixweb/resources/css/flickity.css">
+<link rel="stylesheet" href="netgfixweb/resources/css/normalize.min.css">
+<link rel="stylesheet" href="netgfixweb/resources/css/animate.min.css">
+<script src="netgfixweb/resources/js/flickity.pkgd.js"></script>
+<style>
+#btn-close-modal {
+	width: 100%;
+	text-align: center;
+	cursor: pointer;
+	color: #fff;
+}
+</style>
 
 </head>
+
 <body>
-		<h1>página de catalogo</h1>
-		
-		<div class="demo-content cf">
-		<figure>
-			<img src="/netgfix/resources/img/mobile-wireframe.png" height="300" width="400" alt="Static Image" data-alt="/netgfix/resources/img/mobile-wireframe.gif">
-			<figcaption>UI8 Wireframe Kit by <a href="https://dribbble.com/Creativedash">Creativedash</a></figcaption>
-		</figure>
-		<figure>
-			<img src="/netgfix/resources/img/twitter-button.png" height="600" width="800" alt="Twitter Share Button" data-alt="/netgfix/resources/img/twitter-button.gif">
-			<figcaption>Twitter Share Button by <a href="https://dribbble.com/keisato">Kei Sato</a></figcaption>
-		</figure>
-		<figure>
-			<img src="/netgfix/resources/img/get-low.png" height="300" width="400" alt="" data-alt="/netgfix/resources/img/get-low.gif">
-			<figcaption>Slammed Metal by <a href="https://dribbble.com/MemoryLane">Lhor</a></figcaption>
-		</figure>
+	<jsp:include page="/WEB-INF/include/nav-bar.jsp"></jsp:include>
+	<script src="netgfixweb/resources/js/jquery.min.js"></script>
+	<script src="netgfixweb/resources/js/animatedModal.min.js"></script>
+	<!--Modal-->
+	<form id="form_catalogo" action=<c:url value="/catalogo"/>
+		method="post">
+		<div id="animatedModal">
+			<a class="addFavorite" href="#"
+				onClick="document.getElementById('form_catalogo').submit();">Add
+				Favorite</a>
+			<div id="btn-close-modal" class="close-animatedModal">Fechar</div>
+			<div class="modal-content">
+				<img id="imgmodal" src="" style='width: 100%; heigth: 100%'
+					alt='tulip' /> <input id="identificacaoimg" name="address"
+					type="hidden" value="">
+			</div>
+		</div>
+	</form>
+
+
+	<h4>Esporte</h4>
+	<div id="celebridade" class="carousel"
+		data-flickity='{ "lazyLoad": 2, "initialIndex": 2 }'>
+		<c:forEach items="${catalogo}" var="gif">
+			<c:if test="${gif.categoria == 'Esporte'}">
+				<div class="carousel-cell">
+					<a id="link${gif.id}" href="#animatedModal"><img
+						class="carousel-cell-image" onclick="changeIt(this)"
+						data-flickity-lazyload="${gif.address}"
+						style="width: 100%; heigth: 100%" alt="${gif.descricao}" /></a>
+				</div>
+			</c:if>
+		</c:forEach>
 	</div>
-		
-		<script src="/netgfix/resources/js/script-min.js"></script>
+
+
+	<h4>Pet</h4>
+	<div id="celebridade" class="carousel"
+		data-flickity='{ "lazyLoad": 2, "initialIndex": 2 }'>
+		<c:forEach items="${catalogo}" var="gif">
+			<c:if test="${gif.categoria == 'Pet'}">
+				<div class="carousel-cell">
+					<a id="link${gif.id}" href="#animatedModal"><img
+						class="carousel-cell-image" onclick="changeIt(this)"
+						data-flickity-lazyload="${gif.address}"
+						style="width: 100%; heigth: 100%" alt="${gif.descricao}" /></a>
+				</div>
+			</c:if>
+		</c:forEach>
+	</div>
+
+	<h4>Crianças</h4>
+	<div id="celebridade" class="carousel"
+		data-flickity='{ "lazyLoad": 2, "initialIndex": 2 }'>
+		<c:forEach items="${catalogo}" var="gif">
+			<c:if test="${gif.categoria == 'Crianca'}">
+				<div class="carousel-cell">
+					<a id="link${gif.id}" href="#animatedModal"><img
+						class="carousel-cell-image" onclick="changeIt(this)"
+						data-flickity-lazyload="${gif.address}"
+						style="width: 100%; heigth: 100%" alt="${gif.descricao}" /></a>
+				</div>
+			</c:if>
+		</c:forEach>
+	</div>
+
+	<h4>Celebridades</h4>
+	<div id="celebridade" class="carousel"
+		data-flickity='{ "lazyLoad": 2, "initialIndex": 2 }'>
+		<c:forEach items="${catalogo}" var="gif">
+			<c:if test="${gif.categoria == 'Celebridades'}">
+				<div class="carousel-cell">
+					<a id="link${gif.id}" href="#animatedModal"><img
+						class="carousel-cell-image" onclick="changeIt(this)"
+						data-flickity-lazyload="${gif.address}"
+						style="width: 100%; heigth: 100%" alt="${gif.descricao}" /></a>
+				</div>
+			</c:if>
+		</c:forEach>
+	</div>
+
+	<jsp:include page="footer.jsp" />
+
+	<c:forEach items="${catalogo}" var="gif">
+		<c:if test="${gif.categoria == 'Esporte'}">
+			<script>$("#link${gif.id}").animatedModal();</script>
+		</c:if>
+	</c:forEach>
+	
+	<c:forEach items="${catalogo}" var="gif">
+		<c:if test="${gif.categoria == 'Pet'}">
+			<script>$("#link${gif.id}").animatedModal();</script>
+		</c:if>
+	</c:forEach>
+	
+	<c:forEach items="${catalogo}" var="gif">
+		<c:if test="${gif.categoria == 'Crianca'}">
+			<script>$("#link${gif.id}").animatedModal();</script>
+		</c:if>
+	</c:forEach>
+	
+	<c:forEach items="${catalogo}" var="gif">
+		<c:if test="${gif.categoria == 'Celebridades'}">
+			<script>$("#link${gif.id}").animatedModal();</script>
+		</c:if>
+	</c:forEach>
+	
+	
+	<script>
+		function changeIt(img) {
+			$("#imgmodal").attr("src", img.src);
+			$("#identificacaoimg").attr("value", img.src);
+		}
+	</script>
 </body>
 </html>
